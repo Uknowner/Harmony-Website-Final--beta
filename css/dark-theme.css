@@ -1,0 +1,65 @@
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --bg: #0f0f13;
+    --surface: #1a1a24;
+    --surface2: #22222e;
+    --surface3: #2a2a38;
+    --border: #3a3a4a;
+    --text: #e8e8f0;
+    --text-dim: #9a96a8;
+    --text-faint: #6b6678;
+
+    --red: #ff6b6b;
+    --blue: #5b9cf5;
+    --green: #8bc34a;
+    --yellow: #f4d35e;
+    
+    --amber: #f0b944;
+    --amber-dim: #3d3018;
+    --amber-glow: #f0b944;
+    
+    --mark-bg: #3d2e0a;
+    --mark-fg: #f0b944;
+    
+    --green-dim: #1a2e12;
+    --red-dim: #3d1818;
+
+    --footer-bg: #0a0a0a;
+    --footer-text: #999999;
+    --footer-heading: #ffffff;
+    --footer-border: rgba(255, 255, 255, 0.06);
+    --footer-bottom-text: #555555;
+
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        
+    --anchor-hover: 0 0 10px rgba(91, 156, 245, 0.5);
+  }
+  
+  /* ── Dark Theme Buttons ── */
+  .btn {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .sidebar {
+    border-left: 1px solid rgba(255,255,255,0.05);
+  }
+  
+  .menu-btn {
+    color: var(--text);
+  }
+
+  .overlay {
+    background: rgba(0,0,0,0.6);
+  }
+}
