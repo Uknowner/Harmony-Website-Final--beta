@@ -2,13 +2,13 @@ import { sendEmail, registerEventListener, harmonyDetails } from "../utils.js";
 
 export function render() {
 return `
-<div class="cards">
+<div class="cards" id="contact-container">
     <section class="card">
         <h2>Email Harmony</h2>
 
         <form id="contact-form" class="contact-form">
-            <input type="text" id="name" placeholder="Full name" required>
-            <input type="email" id="email" placeholder="Email address" required>
+            <input type="text" id="given-name" autofill="name" placeholder="Full name" required>
+            <input type="email" id="email" autofill="email" placeholder="Email address" required>
             <input type="text" id="subject" placeholder="Subject">
             <textarea id="body" rows="5" placeholder="Message" required></textarea>
 
