@@ -1,0 +1,159 @@
+.hero {
+  position: relative;
+  height: 70vh;
+  min-height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Lightened: was brightness(0.55), overlay was 0.55 at bottom */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.78);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.32) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  max-width: 700px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+  line-height: 1.15;
+  color: white;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin: 0 0 2rem;
+  opacity: 0.92;
+  color: white;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: #222;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* CTA button — amber instead of blue, stands out on the photo */
+.hero-btn {
+  font-size: 1rem;
+  padding: 0.8rem 2.2rem;
+  background: var(--amber);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(212, 148, 26, 0.45);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.hero-btn:hover {
+  background: var(--amber-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 148, 26, 0.5);
+}
+
+/* ── Bottom gradient bleed into page background ── */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Scroll indicator ── */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  opacity: 0;
+  animation: scroll-indicator-fade-in 0.6s ease 1.4s forwards;
+}
+
+.hero-scroll-indicator span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--text);
+    border-bottom: 2px solid var(--text);
+    transform: rotate(45deg);
+    animation: scroll-chevron-bounce 1.4s ease-in-out infinite;
+}
+
+.hero-scroll-indicator span:nth-child(2) {
+  animation-delay: 0.15s;
+  opacity: 0.6;
+}
+
+.hero-scroll-indicator span:nth-child(3) {
+  animation-delay: 0.3s;
+  opacity: 0.3;
+}
+
+@keyframes scroll-indicator-fade-in {
+  to { opacity: 1; }
+}
+
+@keyframes scroll-chevron-bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50%       { transform: rotate(45deg) translateY(4px); }
+}
+
+.hero-fullscreen {
+    position: fixed;
+    inset: 0;
+    height: 100dvh;
+    z-index: 500;
+}
+
+.hero-collapsing {
+    height: 70vh;
+    transition: height 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
