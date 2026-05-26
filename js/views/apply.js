@@ -1,5 +1,3 @@
-import { harmonyDetails } from "../utils.js";
-    
 export function render() {
     const html = `
     <div class="cards">
