@@ -1,0 +1,61 @@
+#application-card h1 {
+  color: var(--blue);
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.important {
+  background: rgba(230, 57, 70, 0.1);
+  border-left: 5px solid var(--red);
+  padding: 18px;
+  border-radius: var(--radius);
+  margin-bottom: 25px;
+}
+
+#application-card .important strong {
+  color: var(--red);
+}
+
+#application-card p {
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+#application-card .documents {
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: var(--radius);
+}
+
+#application-card .documents h2 {
+  color: var(--green);
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+#application-card .documents ul {
+  list-style: none;
+}
+
+#application-card .documents li {
+  background: var(--surface);
+  margin-bottom: 12px;
+  padding: 14px;
+  border-left: 4px solid var(--yellow);
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+#application-card #ending-message {
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+}
+
+h1 {
+    font-size: 1.6rem;
+  }
+}
