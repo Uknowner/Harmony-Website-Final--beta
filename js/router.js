@@ -1,4 +1,5 @@
-import { destroyEventListeners, registerEventListener } from "./utils.js";
+import { destroyEventListeners } from "./utils.js";
+import { applyAnimationsSetting } from './config/siteSettings.js';
 
 const routes = {
     home: "home",
@@ -12,7 +13,6 @@ const routes = {
 };
 
 let currentModule = null;
-let scrollObserver = null;
 
 export const router = {
     _historyIndex: 0,
@@ -61,8 +61,7 @@ export const router = {
 
     async loadView(file, { isBack = false } = {}) {
         destroyEventListeners();
-        scrollObserver?.disconnect();
-        scrollObserver = null;
+        
         let scrollTarget = null;
     
         if (file.includes("?")) {
@@ -79,52 +78,21 @@ export const router = {
 
         const content = document.getElementById("page");
 
-        // Lock height so footer can't jump during transition
-        content.style.minHeight = content.offsetHeight + "px";
-
-        content.classList.add("page-exit");
-        await new Promise(r => setTimeout(r, 150));
-        content.classList.remove("page-exit");
-
         try {
             const module = await import(`./views/${file}.js`);
-        currentModule = module;
+            currentModule = module;
 
             content.innerHTML = module.render?.() || "";
-    
-            requestAnimationFrame(() => {
-                content.style.minHeight = "";
-                content.classList.add("page-enter");
-            });
-
-            setTimeout(() => content.classList.remove("page-enter"), 150);
         
             await module.init?.(isBack ? null : scrollTarget);
 
-            initScrollAnimations();
+            // Apply animations after content is in DOM
+            applyAnimationsSetting();
 
         } catch (e) {
             const { render } = await import("./views/not-found.js");
             content.innerHTML = render();
-            content.style.minHeight = "";
             console.log(e);
         }
     }
 };
-
-function initScrollAnimations() {
-    scrollObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                scrollObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll(".card").forEach((card, i) => {
-        card.classList.add("fade-up");
-        card.style.transitionDelay = `${i * 60}ms`;
-        scrollObserver.observe(card);
-    });
-}
