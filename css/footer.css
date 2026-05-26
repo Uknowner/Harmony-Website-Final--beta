@@ -1,0 +1,205 @@
+/* ==============================
+FOOTER (MOBILE FIRST)
+============================== */
+
+.site-footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 48px 24px 24px;
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    border-radius: 16px 16px 0 0;
+    border: none !important;
+    box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.18) !important;
+    margin: 0 !important;
+}
+
+/* ==============================
+CONTAINER
+============================== */
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ==============================
+ABOUT
+============================== */
+
+.footer-about h3 {
+    color: var(--footer-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+.footer-about p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--footer-text);
+    margin: 0 0 6px;
+}
+
+.footer-about .managed-by {
+    font-size: 0.82rem;
+    color: var(--amber);
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* ==============================
+HEADINGS
+============================== */
+
+.footer-links h4,
+.footer-contact h4,
+.footer-socials h4 {
+    color: var(--footer-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--footer-border);
+}
+
+/* ==============================
+LISTS
+============================== */
+
+.footer-links ul,
+.footer-contact ul,
+.footer-socials ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul,
+.footer-contact ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ==============================
+LINKS + CONTACT
+============================== */
+
+.footer-links a,
+.footer-contact a,
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--footer-text);
+    font-size: 0.88rem;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--footer-text);
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.footer-contact li i {
+    color: var(--amber);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover,
+.footer-socials a:hover {
+    color: var(--amber);
+    padding-left: 4px;
+}
+
+/* ==============================
+SOCIAL ICONS
+============================== */
+
+.footer-socials ul {
+    display: flex;
+    gap: 14px;
+}
+
+.footer-socials ul li a i {
+    font-size: 1.75rem;
+}
+
+/* ==============================
+BOTTOM BAR
+============================== */
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    border-top: 1px solid var(--footer-border);
+    margin-top: 36px;
+    padding-top: 20px;
+    font-size: 0.82rem;
+    color: var(--footer-bottom-text);
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.site-credit {
+    font-size: 0.8rem;
+}
+
+.site-credit a,
+.site-credit a:visited {
+    color: var(--amber);
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.site-credit a:hover {
+    opacity: 0.75;
+}
+
+/* ==============================
+TABLET
+============================== */
+
+@media (min-width: 480px) {
+    .footer-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* ==============================
+DESKTOP
+============================== */
+
+@media (min-width: 900px) {
+    .footer-container {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        align-items: flex-start;
+    }
+
+    .footer-about {
+        max-width: 340px;
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
