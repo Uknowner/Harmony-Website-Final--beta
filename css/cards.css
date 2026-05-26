@@ -1,0 +1,142 @@
+/* ── Page Heading ── */
+#content > h2 {
+  color: var(--text);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#content > p {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.cards {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+/* ==============================
+   CARDS
+============================== */
+.card {
+  background: var(--surface);
+  margin: 1rem;
+  padding: 1.5rem 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  border-color: var(--text-faint);
+}
+
+.card h2 {
+  color: var(--blue);
+  margin-top: 0;
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.card p {
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card strong {
+  color: var(--text);
+}
+
+/* ── Blockquotes ── */
+.card blockquote {
+  background: var(--surface2);
+  border-left: 4px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+.card blockquote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* ── Map iFrame ── */
+.card iframe {
+  width: 100%;
+  height: 200px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 0.75rem 0;
+}
+
+/* ── Special / Apply card ── */
+.special-card {
+  border-color: rgba(212, 148, 26, 0.35);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--amber-dim) 100%);
+}
+
+.special-card:hover {
+  box-shadow: 0 8px 28px rgba(212, 148, 26, 0.18);
+  border-color: var(--amber);
+}
+
+.special-card h2 {
+  border-bottom-color: var(--amber);
+}
+
+/* ── Important notice ── */
+.card .important {
+  background: var(--mark-bg);
+  color: var(--mark-fg);
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-size: 0.88rem;
+  margin-top: 0.75rem;
+}
+
+/* ── Facilities spacing ── */
+.card:nth-child(2) p {
+  padding: 0.35rem 0;
+  margin-bottom: 0;
+}
+
+.card:nth-child(2) p:last-child {
+  border-bottom: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  #content > h2 {
+    font-size: 1.5rem;
+  }
+}
