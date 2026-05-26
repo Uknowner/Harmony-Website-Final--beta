@@ -1,0 +1,38 @@
+{
+    "single-rooms": [
+        {"src": "room1.webp",  "alt": "Single room with refridgerator, chair, and wooden desk"},
+        {"src": "room2.webp",  "alt": "Single room with clean bed and tiny desk near the window"},
+        {"src": "room3.webp",  "alt": "Single room with a made bed"},
+        {"src": "room4.webp",  "alt": "Single room with a made bed, wooden desk, chair, and refridgerator"},
+        {"src": "room5.webp",  "alt": "Single room with a made bed and curtain"},
+        {"src": "room6.webp",  "alt": "Close view of refridgerator and wooden desk of single room."},
+        {"src": "room7.webp",  "alt": "View of basin and cabinet of single room"}
+    ],
+    
+    "gym": [
+        {"src": "bench-press.webp",      "alt": "Picture of gym bench press"},
+        {"src": "wide-bench-press.webp", "alt": "Wide view of bench press"},
+        {"src": "wide-view1.webp",       "alt": "Wide view of gym and its equipments"},
+        {"src": "wide-view2.webp",       "alt": "Second wide view of gym and its equipments"}
+    ],
+    
+    "building": [
+        {"src": "entrance.webp",            "alt": "View of accommodation building entrance"},
+        {"src": "building_view1.webp",      "alt": "Top view of accommodation building"},
+        {"src": "building_view2.webp",      "alt": "Side view of accomodation building (Phase 2)"},
+        {"src": "wide-entrance.webp",        "alt": "Wide entrance view of Harmony Private Home"},
+        {"src": "front-gate.webp",          "alt": "View of the front gate of Harmony Private Home"},
+        {"src": "extra-wide-entrance.webp", "alt": "Extra wide view of Hamorny Private Home's entrance gate"}
+    ],
+    
+    "entertainment": [
+        {"src": "pool-table.webp",      "alt": "Picture of a pool table"},
+        {"src": "table-tennis.webp",    "alt": "Picture of table tennis"},
+        {"src": "video-playing-pool.mp4", "alt": "Video of playing pool"}
+    ],
+    
+    "other": [
+        {"src": "braii_area.webp", "alt": "Open space with braai stands"},
+        {"src": "parking-lot.webp", "alt": "parking lot with 39 stations"}
+    ]
+}
