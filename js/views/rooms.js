@@ -1,5 +1,3 @@
-import { Skeletons } from "../components/modal.js";
-    
 export function render() {
     return `
     <div class="cards">
