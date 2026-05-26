@@ -1,0 +1,91 @@
+/* ==================== */
+/* SPINNER 3: ARC       */
+/* Minimal thin arc, modern and subtle */
+/* ==================== */
+.spinner-arc {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: var(--amber);
+  animation: spin 0.6s linear infinite;
+  margin: auto;
+  z-index: 998;
+}
+
+/* ==================== */
+/* SPINNER 4: DOTS      */
+/* Three bouncing dots, soft and friendly */
+/* ==================== */
+.spinner-dots {
+  display: flex;
+  gap: 6px;
+  width: fit-content;
+  margin: auto;
+}
+
+.spinner-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--amber);
+  border-radius: 50%;
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+
+.spinner-dot:nth-child(1) { animation-delay: 0s; }
+.spinner-dot:nth-child(2) { animation-delay: 0.2s; }
+.spinner-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { 
+    transform: scale(0.6);
+    background: var(--amber-dim);
+  }
+  40% { 
+    transform: scale(1);
+    background: var(--amber);
+  }
+}
+
+/* ==================== */
+/* SPINNER 5: PULSE     */
+/* Single dot breathing, ultra-minimal */
+/* ==================== */
+.spinner-pulse {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse 1.2s ease-in-out infinite;
+  margin: auto;
+}
+
+main:has(.spinner-arc),
+main:has(.spinner-pulse),
+main:has(.spinner-dots) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px; /* so it doesn't collapse */
+}
+
+.spinner-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.4; }
+  50%      { transform: scale(1.4); opacity: 1; }
+}
+
+/* ==================== */
+/* SHARED KEYFRAME      */
+/* ==================== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
