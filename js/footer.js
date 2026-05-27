@@ -1,4 +1,5 @@
 import { harmonyDetails } from "./utils.js";
+import { resolves } from './config/resolver.js'
 
 export function render() {
 return `
@@ -119,7 +120,7 @@ return `
                 <li>
                     <i class="ti ti-mail" aria-hidden="true"></i>
 
-                    <a href="mailto:${harmonyDetails.email}">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${harmonyDetails.email}" target="_blank" rel="noopener noreferrer">
                         ${harmonyDetails.email}
                     </a>
                 </li>
@@ -200,4 +201,14 @@ return `
 
 </div>
 `;
+}
+
+export async function init(scrollTarget) {
+    // 1. Grab the footer from the DOM first
+    const footer = document.querySelector('.site-footer');
+    
+    if (footer) {
+        // 2. Toggle the class safely
+        footer.classList.toggle('is-solid', resolves.features.backgrounds);
+    }
 }
