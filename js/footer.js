@@ -74,6 +74,20 @@ return `
                         Apply
                     </a>
                 </li>
+
+                <li>
+                    <a href="#privacy">
+                        <i class="ti ti-shield-lock" aria-hidden="true"></i>
+                        Privacy Policy
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#terms">
+                        <i class="ti ti-file-text" aria-hidden="true"></i>
+                        Terms of Service
+                    </a>
+                </li>
             </ul>
         </div>
 
