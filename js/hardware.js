@@ -10,114 +10,159 @@ export class UserHardware {
         this._reducedMotionActive = this._reducedMotion.matches;
     }
 
-    getCores() {
-        return this.cores;
+    getCores()    { return this.cores;  }
+    getMemoryGB() { return this.memory; }
+    prefersReducedMotion() { return this._reducedMotionActive; }
+
+    // ── Device type detection ────────────────────────────────────────────────
+    //
+    // Combines three signals to avoid false positives:
+    //   • coarse pointer  → finger/touch input (no mouse)
+    //   • touch points    → device has a touch screen
+    //   • narrow screen   → phone-sized viewport
+    //
+    // A touchscreen laptop still has a fine pointer, so it won't match.
+
+    isMobile() {
+        const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        const hasTouch      = navigator.maxTouchPoints > 0;
+        const narrowScreen  = window.screen.width <= 768;
+        return coarsePointer && hasTouch && narrowScreen;
     }
 
-    getMemoryGB() {
-        return this.memory;
+    isDesktop() {
+        return !this.isMobile();
     }
 
-    prefersReducedMotion() {
-        return this._reducedMotionActive;
-    }
+    // ── Tier classification ──────────────────────────────────────────────────
+    //
+    // MOBILE thresholds (SA students, 2026)
+    //   LOW:  R1000–R2500  Itel P55, Tecno Spark 20C      → ≤6 cores, <4GB RAM
+    //   MID:  R3000–R6000  Samsung A16, Redmi Note 14     → ≤8 cores, ≤6GB RAM
+    //   HIGH: R6000+       Samsung A55, second-hand Pixel → 8+ cores, 6+GB RAM
+    //
+    // DESKTOP/LAPTOP thresholds
+    //   LOW:  Old/budget   Celeron/Pentium, Chromebook    → ≤4 cores, <8GB RAM
+    //   MID:  Mid-range    i5/Ryzen 5, 8–16GB RAM         → ≤8 cores, ≤16GB RAM
+    //   HIGH: Modern       i7/Ryzen 7+, 16+GB RAM         → 8+ cores, 16+GB RAM
 
-    // ── Phone-specific tier classification (SA students, 2026) ──────────────
-    // 
-    // LOW:    R1000-R2500  → Entry-level Android (Itel, Tecno Spark, Samsung A0x)
-    //         Realistic: 4-6 cores (A53/A55 little cores), 2-3GB RAM
-    //         Examples: Itel P55 (R1800), Tecno Spark 20C (R2200)
-    // 
-    // MID:    R3000-R6000  → Decent budget (Samsung A1x/A2x, Redmi Note series)
-    //         Realistic: 6-8 cores (some big.LITTLE), 4-6GB RAM
-    //         Examples: Samsung A16 (R3800), Redmi Note 14 (R5500)
-    // 
-    // HIGH:   R6000+       → Mid-range to flagship (Samsung A5x, Pixel 7a, older flagships)
-    //         Realistic: 8+ cores, 6-12GB RAM
-    //         Examples: Samsung A55 (R7000), second-hand Pixel 6 (R6500)
-    
     isLowEnd() {
-        // Low-end phones in SA: 2-3GB RAM, mostly little cores
-        const weakCPU = this.cores  !== null && this.cores  <= 6;    // 4-6 cores = entry level
-        const lowRAM  = this.memory !== null && this.memory <  4;    // 3GB or less = struggling
-        const reducedMotion = this.prefersReducedMotion();           // User knows their phone is slow
-        
-        return weakCPU || lowRAM || reducedMotion;
+        const reducedMotion = this.prefersReducedMotion();
+
+        if (this.isMobile()) {
+            const weakCPU = this.cores  !== null && this.cores  <= 6;
+            const lowRAM  = this.memory !== null && this.memory <  4;
+            return weakCPU || lowRAM || reducedMotion;
+        } else {
+            const weakCPU = this.cores  !== null && this.cores  <= 4;
+            const lowRAM  = this.memory !== null && this.memory <  8;
+            return weakCPU || lowRAM || reducedMotion;
+        }
     }
 
     isMidRange() {
-        if (this.isLowEnd()) return false;
-        
-        // Mid-range phone: 6-8 cores OR 4-6GB RAM
-        const midCPU = this.cores  !== null && this.cores  <= 8;
-        const midRAM = this.memory !== null && this.memory <= 6;
-        
-        // Special case: 8GB RAM but weak CPU (e.g., random Chinese brand)
-        const decentRAMWithWeakCPU = (this.memory !== null && this.memory >= 6) && 
-                                      (this.cores  !== null && this.cores  <= 6);
-        
-        return (midCPU || midRAM) && !decentRAMWithWeakCPU;
+        const low = this.isLowEnd();
+        if (low) return false;
+
+        if (this.isMobile()) {
+            const midCPU = this.cores  !== null && this.cores  <= 8;
+            const midRAM = this.memory !== null && this.memory <= 6;
+
+            // 6GB RAM but weak CPU (cheap brand padding specs)
+            const paddedSpecs = (this.memory !== null && this.memory >= 6) &&
+                                 (this.cores  !== null && this.cores  <= 6);
+
+            return (midCPU || midRAM) && !paddedSpecs;
+        } else {
+            const midCPU = this.cores  !== null && this.cores  <= 8;
+            const midRAM = this.memory !== null && this.memory <= 16;
+
+            // 16GB RAM but only 4 cores (e.g. old Xeon workstation)
+            const paddedSpecs = (this.memory !== null && this.memory >= 16) &&
+                                  (this.cores  !== null && this.cores  <= 4);
+
+            return (midCPU || midRAM) && !paddedSpecs;
+        }
     }
 
     isHighEnd() {
-        if (this.isLowEnd() || this.isMidRange()) return false;
-        
-        // High-end phone: 8+ cores AND 6+GB RAM (what SA students save up for)
-        const goodCPU = this.cores  === null || this.cores  >= 8;
-        const goodRAM = this.memory === null || this.memory >= 6;
-        
-        return goodCPU && goodRAM;
+        const low = this.isLowEnd();
+        const mid = this.isMidRange();
+        if (low || mid) return false;
+
+        if (this.isMobile()) {
+            const goodCPU = this.cores  === null || this.cores  >= 8;
+            const goodRAM = this.memory === null || this.memory >= 6;
+            return goodCPU && goodRAM;
+        } else {
+            const goodCPU = this.cores  === null || this.cores  >= 8;
+            const goodRAM = this.memory === null || this.memory >= 16;
+            return goodCPU && goodRAM;
+        }
     }
 
     getTier() {
-        if (this.isLowEnd()) return "low";
-        if (this.isMidRange()) return "mid";
+        const low = this.isLowEnd();
+        if (low) return "low";
+
+        const mid = this.isMidRange();
+        if (mid) return "mid";
+
         return "high";
     }
 
-    // ── Phone-specific feature gates ────────────────────────────────────────
-    
+    // ── Feature gates ────────────────────────────────────────────────────────
+
     canShowBackground() {
-        // Backgrounds cost battery on phones. Only on mid/high.
-        return !this.isLowEnd();
-    }
-    
-    // Can we run smooth 60fps animations?
-    canAnimate() {
-        return !this.isLowEnd();  // Mid-range phones handle basic CSS animations
-    }
-    
-    // Should we lazy-load everything aggressively?
-    shouldAggressiveLazyLoad() {
-        return this.isLowEnd();   // Low-end phones need all the help they can get
-    }
-    
-    // Can we afford webp/avif or need jpeg?
-    canUseModernImages() {
-        return !this.isLowEnd();  // Mid/high can decode webp efficiently
-    }
-    
-    // Reduce API calls / data usage (capped mobile data)
-    shouldReduceData() {
-        return this.isLowEnd() || this.prefersReducedMotion();
-    }
-    
-    // Can we show autoplay videos? (battery + data killer on low-end)
-    canAutoplayVideo() {
-        return this.isHighEnd();   // Only high-end gets video backgrounds
+        const low = this.isLowEnd();
+        // Laptops can always show backgrounds; phones only on mid/high
+        return this.isDesktop() ? !low : !low;
     }
 
-    // ── Diagnostics ─────────────────────────────────────────────────────────
-    
+    canAnimate() {
+        const low = this.isLowEnd();
+        return !low;
+    }
+
+    shouldAggressiveLazyLoad() {
+        const low = this.isLowEnd();
+        // Always aggressive on low-end; mobile mid-range also benefits
+        return low || (this.isMobile() && this.isMidRange());
+    }
+
+    canUseModernImages() {
+        const low = this.isLowEnd();
+        return !low;
+    }
+
+    shouldReduceData() {
+        const low = this.isLowEnd();
+        // Laptops are usually on WiFi, so only reduce on low-end mobile
+        return this.isMobile() ? (low || this.prefersReducedMotion()) : low;
+    }
+
+    canAutoplayVideo() {
+        const high = this.isHighEnd();
+        // Desktops can autoplay on mid+; phones only on high-end (battery/data)
+        return this.isDesktop() ? !this.isLowEnd() : high;
+    }
+
+    // ── Diagnostics ──────────────────────────────────────────────────────────
+
     getSummary() {
+        const tier   = this.getTier();
+        const mobile = this.isMobile();
+
         return {
+            device:                    mobile ? "mobile" : "desktop",
             cores:                     this.getCores(),
             memoryGB:                  this.getMemoryGB(),
             prefersReducedMotion:      this.prefersReducedMotion(),
-            tier:                      this.getTier(),
+            tier,
             canShowBackground:         this.canShowBackground(),
             canAnimate:                this.canAnimate(),
             shouldAggressiveLazyLoad:  this.shouldAggressiveLazyLoad(),
+            canUseModernImages:        this.canUseModernImages(),
             shouldReduceData:          this.shouldReduceData(),
             canAutoplayVideo:          this.canAutoplayVideo(),
         };
