@@ -1,5 +1,6 @@
 import { getTestimonials } from "../api.js";
 import { createTestimonialCards } from "../components/components.js";
+import { initScrollAnimations } from "../config/animations.js";
 
 export function render() {
     return `
@@ -10,8 +11,7 @@ export function render() {
 
 export async function init(scrollTarget) {
     const container = document.querySelector(".testimonials-container");
-    
     const testimonials = await getTestimonials();
-    
-    createTestimonialCards(container, testimonials);(container, testimonials);
+    await createTestimonialCards(container, testimonials);
+    initScrollAnimations(); // cards are in DOM now
 }
