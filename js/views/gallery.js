@@ -2,8 +2,6 @@ import { getGallery } from "../api.js";
 import { titleCase, registerEventListener, scrollToTarget } from "../utils.js";
 import { lightBox } from "../components/modal.js";
 import { network } from "../network.js";
-import { spinners } from "../components/spinners.js";
-import { skeletons } from "../components/skeletons.js";
 
 export function render() {
     return `
