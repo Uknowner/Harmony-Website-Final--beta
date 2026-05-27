@@ -33,42 +33,24 @@ export function toggleAnimations() {
 let _themeChangeListenerAttached = false;
 
 function setBackground() {
-    if (!resolves.features.backgrounds) return;
-
-    const page = document.getElementById('page');
-    if (!page) return;
+    // Target the body instead of #page so the image covers the entire screen
+    const targetEl = document.body; 
 
     const isMobile    = resolves.features.isMobile;
     const theme       = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const variantCount = resolves.backgroundVariantCount || 3;
-    const pick        = Math.floor(Math.random() * variantCount) + 1;
+    const pick = Math.floor(Math.random() * 2) + 1;
 
-    page.style.backgroundImage      = `url('/assets/images/backgrounds-${theme}/background.webp')`;
-    page.style.backgroundSize       = 'cover';
-    page.style.backgroundPosition   = 'center';
-    // fixed attachment is broken on iOS/Android — use scroll on mobile
-    page.style.backgroundAttachment = isMobile ? 'scroll' : 'fixed';
-
-    console.group('🖼️ Background');
-    console.log('theme:   ', theme);
-    console.log('variant: ', pick);
-    console.log('mobile:  ', isMobile);
-    console.groupEnd();
+    targetEl.style.backgroundImage      = `url('/assets/images/backgrounds/${theme}${pick}.webp')`;
+    targetEl.style.backgroundSize       = 'cover';
+    targetEl.style.backgroundPosition   = 'center';
+    targetEl.style.backgroundAttachment = isMobile ? 'scroll' : 'fixed';
 }
 
 // ==============================
 // MAIN APPLY SETTINGS
 // ==============================
 export async function applySettings() {
-    const isMobile    = resolves.features.isMobile;
     const backgrounds = resolves.features.backgrounds;
-    const animations  = resolves.features.animations;
-
-    console.group('⚙️ Site settings');
-    console.log('mobile:      ', isMobile);
-    console.log('backgrounds: ', backgrounds);
-    console.log('animations:  ', animations);
-    console.groupEnd();
 
     if (backgrounds) {
         setBackground();
@@ -78,9 +60,10 @@ export async function applySettings() {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setBackground);
             _themeChangeListenerAttached = true;
         }
+   
     }
 
-    // applyAnimationsSetting() is called from router.js after each page render
+    applyAnimationsSetting();
 }
 
 // ==============================
