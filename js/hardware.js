@@ -29,28 +29,26 @@ export class UserHardware {
     // ── Tier classification ──────────────────────────────────────────────────
     // Clean boundaries to stop capable devices from falling into low-performance traps.
     isLowEnd() {
-        if (this.isMobile()) {
-            // True low-end entry devices (≤ 4 cores or under 4GB RAM)
-            const weakCPU = this.cores  !== null && this.cores  <= 4;
-            const lowRAM  = this.memory !== null && this.memory <  4;
-            return weakCPU || lowRAM;
-        } else {
-            const weakCPU = this.cores  !== null && this.cores  <= 4;
-            const lowRAM  = this.memory !== null && this.memory <  4;
-            return weakCPU || lowRAM;
-        }
+        // True low-end entry devices (≤ 4 cores OR strictly under 4GB RAM)
+        // This ensures the Samsung A15 (8 cores, >= 4GB RAM reported) stays out of low-end.
+        const weakCPU = this.cores  !== null && this.cores <= 4;
+        const lowRAM  = this.memory !== null && this.memory < 4; 
+        
+        return weakCPU || lowRAM;
     }
 
     isHighEnd() {
         if (this.isLowEnd()) return false;
 
         if (this.isMobile()) {
-            // High-end benchmarks: 8+ cores AND 8GB+ reported RAM
-            const strongCPU = this.cores  === null || this.cores  >= 8;
+            // High-end mobile benchmarks: 8+ cores AND 8GB+ reported RAM.
+            // Because the A15 reports 4GB of memory to the browser, it fails 'ampleRAM' 
+            // and safely drops down to mid-range.
+            const strongCPU = this.cores  === null || this.cores >= 8;
             const ampleRAM  = this.memory === null || this.memory >= 8;
             return strongCPU && ampleRAM;
         } else {
-            const strongCPU = this.cores  === null || this.cores  >= 6;
+            const strongCPU = this.cores  === null || this.cores >= 6;
             const ampleRAM  = this.memory === null || this.memory >= 16;
             return strongCPU && ampleRAM;
         }
@@ -58,7 +56,7 @@ export class UserHardware {
 
     isMidRange() {
         // Anything that isn't struggling on low-end and isn't premium high-end 
-        // falls perfectly here (e.g. Octa-core chipsets with 4GB/6GB reported memory)
+        // falls perfectly here (e.g. Samsung A15 with its Octa-core chip & 4GB/6GB reported memory)
         return !this.isLowEnd() && !this.isHighEnd();
     }
 
@@ -71,18 +69,14 @@ export class UserHardware {
     // ── Generous Feature Gates ────────────────────────────────────────────────
 
     canShowBackground() {
-        // Unlocked for mid & high tiers
         return !this.isLowEnd();
     }
 
     canAnimate() {
-        // Enabled for mid/high, unless the user manually turned on reduced motion
         return !this.isLowEnd() && !this.prefersReducedMotion();
     }
 
     shouldAggressiveLazyLoad() {
-        // Mid-range phones like the A25 can handle normal background asset queueing. 
-        // Aggressive loading is reserved only for low-end hardware saving execution cycles.
         return this.isLowEnd();
     }
 
@@ -95,12 +89,11 @@ export class UserHardware {
     }
 
     canAutoplayVideo() {
-        // Generous unlock: Mid-range devices decode inline modern formats flawlessly
         return !this.isLowEnd();
     }
 
     // ── Diagnostics ──────────────────────────────────────────────────────────
-
+    
     getSummary() {
         const tier   = this.getTier();
         const mobile = this.isMobile();
