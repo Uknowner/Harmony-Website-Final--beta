@@ -89,11 +89,11 @@ export const router = {
         
             await module.init?.(isBack ? null : scrollTarget);
 
-            // Apply animations after content is in DOM
-            applyAnimationsSetting();
-
             // Site Settings
             applySettings();
+
+            // Apply animations after content is in DOM
+            applyAnimationsSetting();
 
         } catch (e) {
             const { render } = await import("./views/not-found.js");
