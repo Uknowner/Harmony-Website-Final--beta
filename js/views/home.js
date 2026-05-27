@@ -23,7 +23,7 @@ export function render() {
         </div>
         
         <div class="cards" id="container">
-            <div class="card">
+            <div class="card fade-up">
                 <div class="card-text-media">
                     <div class="card-content-container">
                         <h2>Rooms & Pricing</h2>
@@ -47,7 +47,7 @@ export function render() {
                 <a href="#gallery?scroll=single%20rooms" class="btn">See rooms</a>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>Facilities</h2>
                 <p><strong>Study Areas:</strong> Quiet, spacious areas for focused study outside your room.</p>
                 <p><strong>Laundry Services:</strong> Washing machines and dryers in each building — no need to hang clothes.</p>
@@ -57,12 +57,12 @@ export function render() {
                 <a href="#facilities" class="btn">Read more</a>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>Gallery</h2>
                 <div class="gallery"></div>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>What Our Students Say</h2>
                 <p>We value the feedback from our tenants as they help us build a better environment for the next. See our reviews and what students had to say about Harmony.</p>
                 <blockquote>
@@ -77,7 +77,7 @@ export function render() {
                 <a href="#testimonials" class="btn">Read more</a>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>Find Us</h2>
                 <iframe
                     src="${harmonyDetails.googleMapsUrl}"
@@ -92,7 +92,7 @@ export function render() {
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>Visit Our:</h2>
                 <div class="contact-buttons">
                     <a href="${harmonyDetails.tiktok}" target="_blank" rel="noopener noreferrer" aria-label="Visit TKC Properties Student Res on TikTok" class="btn contact-btn" aria-label="TikTok">
@@ -108,7 +108,7 @@ export function render() {
                 </div>
             </div>
 
-            <div class="card special-card">
+            <div class="card special-card fade-up">
                 <h2>Apply</h2>
                 <p>Spaces are limited — secure your room today!</p>
                 <a href="#apply" class="btn">Application Process</a>
