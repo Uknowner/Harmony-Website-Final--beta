@@ -1,5 +1,6 @@
 import { destroyEventListeners } from "./utils.js";
 import { applyAnimationsSetting } from './config/siteSettings.js';
+import { applySettings } from './config/siteSettings.js';
 
 const routes = {
     home: "home",
@@ -9,7 +10,9 @@ const routes = {
     "about-tkc": "about-tkc",
     facilities: "facilities",
     testimonials: "testimonials",
-    rooms: "rooms"
+    rooms: "rooms",
+    privacy: "privacy",
+    terms: "terms"
 };
 
 let currentModule = null;
@@ -88,6 +91,9 @@ export const router = {
 
             // Apply animations after content is in DOM
             applyAnimationsSetting();
+
+            // Site Settings
+            applySettings();
 
         } catch (e) {
             const { render } = await import("./views/not-found.js");
