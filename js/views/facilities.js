@@ -1,10 +1,10 @@
-import { Skeletons } from "../components/modal.js";
-    
+import { initScrollAnimations } from "../config/animations.js";
+
 export function render() {
     const html = `
         <div class="cards">
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>📶 Wi-Fi</h2>
                 <p>
                     Staying connected is non-negotiable when you're a student, and we get that.
@@ -14,7 +14,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>📚 Study Areas</h2>
                 <p>
                     Sometimes your room just isn't the right headspace to get work done.
@@ -24,7 +24,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🧺 Laundry Services</h2>
                 <p>
                     Forget the hassle of hand-washing or hunting for a laundromat.
@@ -34,7 +34,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🔒 Security</h2>
                 <p>
                     Your safety is our priority, full stop. The premises are monitored
@@ -44,7 +44,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🏋️ Gym</h2>
                 <p>
                     Staying active is a big part of student life, and you won't need a
@@ -54,7 +54,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>📺 TV Room</h2>
                 <p>
                     Not every moment has to be about studying. The TV room is a shared space
@@ -64,7 +64,7 @@ export function render() {
                 </p>
             </div>
 
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🎱 Entertainment Room</h2>
                 <p>
                     When you need a proper break, the entertainment room delivers.
@@ -74,7 +74,7 @@ export function render() {
                 </p>
             </div>
             
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🛠️ Maintenance</h2>
                 <p>
                     We have a dedicated maintenance team ready to assist you with any furniture
@@ -82,7 +82,7 @@ export function render() {
                 </p>
             </div>
             
-            <div class="card">
+            <div class="card fade-up">
                 <h2>🧹 Cleaning Services</h2>
                 <p>
                     Our dedicated cleaning team keeps all common areas, hallways, and shared facilities
@@ -91,7 +91,7 @@ export function render() {
                 </p>
             </div>
             
-            <div class="card text-center">
+            <div class="card text-center fade-up">
                 <h2>Gallery</h2>                
                 <p>
                     Take a look inside Harmony Private Home. Our gallery showcases the comfortable rooms, modern
@@ -106,4 +106,8 @@ export function render() {
     `;
 
     return html;
+}
+
+export async function init(scrollTarget) {
+    initScrollAnimations();
 }
