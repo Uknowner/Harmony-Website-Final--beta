@@ -124,11 +124,11 @@ iframe {
 #page {
     min-height: 100vh;
     transition: opacity 0.15s ease, transform 0.15s ease;
-    /* background-image: ""; Background image set in app.js */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
 }
+
+/* You can delete the @media (max-width: 768px) block that changed 
+   #page to background-attachment: scroll, because siteSettings.js 
+   handles that dynamically on the body now! */
     
 @media (min-width: 480px) {    
     .card-text-media {
