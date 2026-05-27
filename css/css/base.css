@@ -1,0 +1,69 @@
+/* ==============================
+   ROOT (LIGHT THEME DEFAULT)
+============================== */
+:root {
+    --bg: #f4f4f4;
+    --surface: #ffffff;
+    --surface2: #f0f0f0;
+    --surface3: #e8e8e8;
+    --border: #dcdcdc;
+    --text: #222;
+    --text-dim: #6b6660;
+    --text-faint: #b0b0b0;
+
+    --red: #e63946;
+    --blue: #007BFF;
+    --green: #6B8E23;
+    --yellow: #f4d35e;
+    
+    --amber: #d4941a;
+    --amber-dim: #fdf0d5;
+    --amber-glow: #c2780a;
+    
+    --mark-bg: #fef3c7;
+    --mark-fg: #b45309;
+    
+    --green-dim: #e8f5e0;
+    --red-dim: #fee2e2;
+
+    --footer-bg: #f0f0f0;
+    --footer-text: #444444;
+    --footer-heading: #111111;
+    --footer-border: rgba(0, 0, 0, 0.08);
+    --footer-bottom-text: #888888;
+
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 8px;
+    
+    --anchor-hover: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+/* ==============================
+   GLOBAL (MOBILE FIRST)
+============================== */
+#favicon {
+  border-radius: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-decoration: none;
+  scroll-padding-top: 80px;
+}
+
+* {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  min-width: 300px;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
