@@ -1,5 +1,5 @@
 import { initHarmonyDetails } from './utils.js';
-import { applySettings } from './config/siteSettings.js';
+import { applyAnimationsSetting } from './config/siteSettings.js';
 import { resolves } from './config/resolver.js';
 import { router } from './router.js';
 import { network } from './network.js';
@@ -92,6 +92,9 @@ async function initSite() {
 
     // Header scroll behaviour
     initiateHeaderScrolling();
+
+    // Initiate animations
+    applyAnimationsSetting();
 
     // Network monitoring
     initNetwork();
