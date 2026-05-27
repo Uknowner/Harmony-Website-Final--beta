@@ -1,4 +1,5 @@
 import { Skeletons } from "./skeletons.js";
+import { initScrollAnimations } from "../config/animations.js";
 
 export class Popup {
     constructor() {
@@ -127,7 +128,7 @@ export async function createTestimonialCards(container, data, skeletonOptions = 
     try {
         data.forEach(testimonial => {
             const card = document.createElement("div");
-            card.classList.add("card");
+            card.classList.add("card", "fade-up");
 
             const blockquote = document.createElement("blockquote");
 
@@ -151,6 +152,9 @@ export async function createTestimonialCards(container, data, skeletonOptions = 
             card.appendChild(blockquote);
             container.appendChild(card);
         });
+
+        // Cards are now in the DOM — start observing them
+        initScrollAnimations();
 
     } catch (err) {
         container.textContent = "Failed to load testimonials.";
