@@ -2,6 +2,35 @@
 FOOTER (MOBILE FIRST)
 ============================== */
 
+/* ==========================================================
+   1. DEFAULT STATE: GLASSMORPHISM STYLES (Condition is False)
+   ========================================================== */
+.site-footer {
+    position: relative;
+    width: 100%;
+
+    /* Glassmorphism Settings */
+    background: rgba(255, 255, 255, 0.04); 
+    backdrop-filter: blur(20px);            
+    -webkit-backdrop-filter: blur(20px);    
+    
+    /* Lighting Elements */
+    border-top: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12);    
+
+    /* Shared Spacing, Typography & Structure */
+    color: var(--footer-text);
+    padding: 48px 24px 24px; 
+    font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+    border-radius: 24px 24px 0 0; 
+    margin: 0;
+    box-sizing: border-box;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ==========================================================
+   2. ALTERNATIVE STATE: SOLID STYLES (Condition is True)
+   ========================================================== */
 .site-footer {
     background: var(--footer-bg);
     color: var(--footer-text);
@@ -148,13 +177,11 @@ BOTTOM BAR
     text-align: center;
     border-top: 1px solid var(--footer-border);
     margin-top: 36px;
+    margin-left: 12px;
+    margin-right: 12px;
     padding-top: 20px;
     font-size: 0.82rem;
     color: var(--footer-bottom-text);
-}
-
-.footer-bottom p {
-    margin: 0;
 }
 
 .site-credit {
