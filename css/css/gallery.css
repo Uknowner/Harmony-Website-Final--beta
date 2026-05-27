@@ -1,0 +1,138 @@
+/* ==============================
+   CATEGORY CARD (MOBILE FIRST)
+============================== */
+.category-card {
+  background: var(--surface);
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 1200px;
+}
+
+/* ==============================
+   GALLERY PAGE (MOBILE FIRST)
+   Structure: .gallery > .card > .image-grid > img
+============================== */
+.gallery {
+  display: block;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.image-grid img, .image-grid video {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.image-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* ==============================
+   HOME PAGE GALLERY PREVIEW (MOBILE FIRST)
+   Structure: .card > .gallery > img (x3) + .gallery-btn-container
+============================== */
+.card .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.card .gallery img {
+  flex: 1;
+  width: 0;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease;
+}
+
+.card .gallery img:hover {
+  transform: scale(1.03);
+}
+
+.card .gallery-empty {
+  background: var(--surface2);
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.card .gallery-empty p {
+  color: var(--text-faint);
+  margin: 0.25rem 0;
+}
+
+.card .gallery-btn-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* ==============================
+   LIGHTBOX
+============================== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 1000;
+}
+
+/* center ONLY image using flex */
+.lightbox.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* image stays centered */
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;   /* add this too, for portrait images */
+  border-radius: var(--radius);
+}
+
+.lightbox .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* ==============================
+   LAPTOP / DESKTOP
+============================== */
+@media (min-width: 480px) {
+
+  .category-card {
+    margin: 2rem auto;
+    padding: 1.5rem;
+  }
+
+  .image-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin-top: 1rem;
+  }
+
+  .image-grid img {
+    height: 220px;
+  }
+}
