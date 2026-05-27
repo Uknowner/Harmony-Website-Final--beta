@@ -2,10 +2,22 @@ import { hardware } from "../hardware.js";
 
 export const resolves = {
     features: {
-        backgrounds: hardware.canShowBackground(),
-        animations: !hardware.prefersReducedMotion(),
-        highQualityImages: hardware.isHighEnd(),
-        lazyVideo: !hardware.isHighEnd(),
+        get isMobile() {
+            return hardware.isMobile();
+        },
+
+        get backgrounds() {
+            return hardware.canShowBackground();
+        },
+        get animations() {
+            return !hardware.prefersReducedMotion();
+        },
+        get highQualityImages() {
+            return hardware.isHighEnd();
+        },
+        get lazyVideo() {
+            return !hardware.isHighEnd();
+        },
     },
 
     hero: {
