@@ -29,12 +29,18 @@ export class UserHardware {
     // ── Tier classification ──────────────────────────────────────────────────
     // Clean boundaries to stop capable devices from falling into low-performance traps.
     isLowEnd() {
-        // True low-end entry devices (≤ 4 cores OR strictly under 4GB RAM)
-        // This ensures the Samsung A15 (8 cores, >= 4GB RAM reported) stays out of low-end.
-        const weakCPU = this.cores  !== null && this.cores <= 4;
-        const lowRAM  = this.memory !== null && this.memory < 4; 
-        
-        return weakCPU || lowRAM;
+        if (this.isMobile()) {
+            // Mobile low-end: Entry level devices with <= 4 cores OR strictly under 4GB RAM
+            // The Samsung A15 (8 cores, >= 4GB reported RAM) safely bypasses this.
+            const weakCPU = this.cores  !== null && this.cores <= 2;
+            const lowRAM  = this.memory !== null && this.memory < 2;
+            return weakCPU || lowRAM;
+        } else {
+            // Desktop low-end: Can be adjusted independently if desktop baselines change
+            const weakCPU = this.cores  !== null && this.cores <= 4;
+            const lowRAM  = this.memory !== null && this.memory < 4;
+            return weakCPU || lowRAM;
+        }
     }
 
     isHighEnd() {
